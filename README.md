@@ -1,18 +1,11 @@
 # Introduction
 
 This library can be used to create RDF triples in the context of cubes (see: https://cube.link).
-
 The library should be used together with fch-cube-raw-data.
 
-
-
-\# Workflow
-
-
+# Development Workflow
 
 To publish a new version of the NuGet package, proceed as follows.
-
-
 
 * apply and push your changes
 * define and describe the new version in CHANGELOG.md
