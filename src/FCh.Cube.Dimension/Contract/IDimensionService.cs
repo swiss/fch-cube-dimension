@@ -1,8 +1,8 @@
-using Bk.Cube.Dimension.Model;
-using Bk.Dimension.Model;
+using FCh.Cube.Dimension.Model;
+using FCh.Dimension.Model;
 using VDS.RDF;
 
-namespace Bk.Dimension.Contract;
+namespace FCh.Dimension.Contract;
 
 public interface IDimensionService
 {

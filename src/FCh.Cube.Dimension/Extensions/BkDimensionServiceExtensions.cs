@@ -1,8 +1,8 @@
-using Bk.Cube.Dimension.Services;
-using Bk.Dimension.Contract;
+using FCh.Cube.Dimension.Services;
+using FCh.Dimension.Contract;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Bk.Dimension.Extensions;
+namespace FCh.Dimension.Extensions;
 
 // ReSharper disable once UnusedType.Global : Used by the library's consumers
 public static class BkDimensionServiceExtensions

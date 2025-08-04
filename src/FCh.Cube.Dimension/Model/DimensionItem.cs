@@ -1,7 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
-using Lucene.Net.Util;
 
-namespace Bk.Cube.Dimension.Model;
+namespace FCh.Cube.Dimension.Model;
 
 public class DimensionItem
 {
@@ -9,9 +8,9 @@ public class DimensionItem
 
     public required LingualLiteral Name { get; init; }
 
-    public IList<AdditionalLingualProperty> AdditionalLingualProperties { get; } = new List<AdditionalLingualProperty>();
+    public List<AdditionalLingualProperty> AdditionalLingualProperties { get; } = new List<AdditionalLingualProperty>();
 
-    public IList<AdditionalUriProperty> AdditionalUriProperties { get; } = new List<AdditionalUriProperty>();
+    public List<AdditionalUriProperty> AdditionalUriProperties { get; } = new List<AdditionalUriProperty>();
 
     [SetsRequiredMembers]
     public DimensionItem(

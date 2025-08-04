@@ -1,11 +1,11 @@
-using Bk.Cube.Dimension.Model;
-using Bk.Cube.Dimension.Services;
-using Bk.Dimension.Contract;
-using Bk.Dimension.Model;
+using FCh.Cube.Dimension.Model;
+using FCh.Cube.Dimension.Services;
+using FCh.Dimension.Contract;
+using FCh.Dimension.Model;
 using VDS.RDF;
 using VDS.RDF.Nodes;
 
-namespace Bk.Cube.Dimension.Test.Services;
+namespace FCh.Cube.Dimension.Tests.Services;
 
 internal class DimensionServiceTests
 {

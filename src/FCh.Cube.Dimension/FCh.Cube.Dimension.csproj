@@ -12,7 +12,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <InternalsVisibleTo Include="Bk.Cube.Dimension.Test" />
+        <InternalsVisibleTo Include="FCh.Cube.Dimension.Tests" />
     </ItemGroup>
 
 </Project>

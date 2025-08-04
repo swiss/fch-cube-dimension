@@ -1,8 +1,4 @@
 <Project>
-  <PropertyGroup>
-    <Deterministic>false</Deterministic>
-  </PropertyGroup>
-
   <!-- Packaging -->
   <PropertyGroup>
     <Version>1.0.0</Version>
