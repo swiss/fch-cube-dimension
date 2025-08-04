@@ -2,6 +2,12 @@
 
 
 
+\## Version 1.0.3
+
+fix(pipeline): duplicate release configuration removed from 'nuget pack' command
+
+
+
 \## Version 1.0.2
 
 feat(pipeline): applying build configuration in release mode consistently across all dotnet CLI commands

@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  build_and_publish:
 
     runs-on: ubuntu-latest
 
@@ -34,7 +34,7 @@ jobs:
       run: dotnet test src/FCh.Cube.Dimension.sln --configuration Release --no-build --verbosity normal
 
     - name: dotnet pack
-      run: dotnet pack src/FCh.Cube.Dimension/FCh.Cube.Dimension.csproj --configuration Release --configuration Release --no-build -o ./nupkgs /p:Version=${{ steps.get_version.outputs.version }}
+      run: dotnet pack src/FCh.Cube.Dimension/FCh.Cube.Dimension.csproj --configuration Release --no-build -o ./nupkgs /p:Version=${{ steps.get_version.outputs.version }}
 
     - name: dotnet nuget push
       run: dotnet nuget push --configuration Release ./nupkgs/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
