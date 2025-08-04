@@ -2,6 +2,12 @@
 
 
 
+\## Version 1.0.4
+
+fix(pipeline): false release configuration parameter removed from 'nuget push' command
+
+
+
 \## Version 1.0.3
 
 fix(pipeline): duplicate release configuration removed from 'nuget pack' command

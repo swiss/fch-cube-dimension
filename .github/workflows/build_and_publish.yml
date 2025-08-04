@@ -37,5 +37,5 @@ jobs:
       run: dotnet pack src/FCh.Cube.Dimension/FCh.Cube.Dimension.csproj --configuration Release --no-build -o ./nupkgs /p:Version=${{ steps.get_version.outputs.version }}
 
     - name: dotnet nuget push
-      run: dotnet nuget push --configuration Release ./nupkgs/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
+      run: dotnet nuget push ./nupkgs/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
 
