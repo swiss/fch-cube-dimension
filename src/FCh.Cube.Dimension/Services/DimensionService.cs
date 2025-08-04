@@ -1,5 +1,5 @@
 using FCh.Cube.Dimension.Model;
-using FCh.Dimension.Contract;
+using FCh.Cube.Dimension.Contract;
 using FCh.Dimension.Model;
 using VDS.RDF;
 

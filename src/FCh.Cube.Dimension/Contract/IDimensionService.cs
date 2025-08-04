@@ -2,7 +2,7 @@ using FCh.Cube.Dimension.Model;
 using FCh.Dimension.Model;
 using VDS.RDF;
 
-namespace FCh.Dimension.Contract;
+namespace FCh.Cube.Dimension.Contract;
 
 public interface IDimensionService
 {

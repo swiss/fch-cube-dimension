@@ -1,6 +1,6 @@
 using FCh.Cube.Dimension.Model;
 using FCh.Cube.Dimension.Services;
-using FCh.Dimension.Contract;
+using FCh.Cube.Dimension.Contract;
 using FCh.Dimension.Model;
 using VDS.RDF;
 using VDS.RDF.Nodes;

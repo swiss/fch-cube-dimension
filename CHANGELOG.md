@@ -2,6 +2,12 @@
 
 
 
+\## Version 1.0.6
+
+BREAKING CHANGE: Namespaces of contract and extension methods corrected for consistency
+
+
+
 \## Version 1.0.5
 
 feat: README.md included in the NuGet package
