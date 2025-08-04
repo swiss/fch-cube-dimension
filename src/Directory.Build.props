@@ -5,14 +5,11 @@
 
   <!-- Packaging -->
   <PropertyGroup>
-    <!--    <IsPackable>false</IsPackable>-->
-    <!--    <IsPublishable>false</IsPublishable>-->
-
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <Authors>DevOps Team Federal Chancellery</Authors>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageTags>dotnet BK</PackageTags>
+    <PackageId>FCh.Cube.Dimension</PackageId>
   </PropertyGroup>
 </Project>
