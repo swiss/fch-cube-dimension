@@ -2,6 +2,12 @@
 
 
 
+\## Version 1.0.5
+
+feat: README.md included in the NuGet package
+
+
+
 \## Version 1.0.4
 
 fix(pipeline): false release configuration parameter removed from 'nuget push' command
