@@ -1,6 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 
-namespace FCh.Dimension.Model;
+namespace Swiss.FCh.Dimension.Model;
 
 public class RdfNamespace
 {

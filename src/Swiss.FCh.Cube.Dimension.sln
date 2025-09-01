@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 #
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FCh.Cube.Dimension", "FCh.Cube.Dimension\FCh.Cube.Dimension.csproj", "{4A838D4B-A526-4CD7-955C-6214810E4660}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Swiss.FCh.Cube.Dimension", "Swiss.FCh.Cube.Dimension\Swiss.FCh.Cube.Dimension.csproj", "{4A838D4B-A526-4CD7-955C-6214810E4660}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FCh.Cube.Dimension.Tests", "FCh.Cube.Dimension.Tests\FCh.Cube.Dimension.Tests.csproj", "{C08D6F1F-A6A0-42CC-9036-ED54C3D303B3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Swiss.FCh.Cube.Dimension.Tests", "Swiss.FCh.Cube.Dimension.Tests\Swiss.FCh.Cube.Dimension.Tests.csproj", "{C08D6F1F-A6A0-42CC-9036-ED54C3D303B3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

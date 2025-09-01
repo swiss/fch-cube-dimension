@@ -1,11 +1,11 @@
-using FCh.Cube.Dimension.Model;
-using FCh.Cube.Dimension.Services;
-using FCh.Cube.Dimension.Contract;
-using FCh.Dimension.Model;
+using Swiss.FCh.Cube.Dimension.Model;
+using Swiss.FCh.Cube.Dimension.Services;
+using Swiss.FCh.Cube.Dimension.Contract;
+using Swiss.FCh.Dimension.Model;
 using VDS.RDF;
 using VDS.RDF.Nodes;
 
-namespace FCh.Cube.Dimension.Tests.Services;
+namespace Swiss.FCh.Cube.Dimension.Tests.Services;
 
 internal class DimensionServiceTests
 {

@@ -1,8 +1,8 @@
-using FCh.Cube.Dimension.Services;
-using FCh.Cube.Dimension.Contract;
+using Swiss.FCh.Cube.Dimension.Services;
+using Swiss.FCh.Cube.Dimension.Contract;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace FCh.Cube.Dimension.Extensions;
+namespace Swiss.FCh.Cube.Dimension.Extensions;
 
 // ReSharper disable once UnusedType.Global : Used by the library's consumers
 public static class FChCubeDimensionExtensions

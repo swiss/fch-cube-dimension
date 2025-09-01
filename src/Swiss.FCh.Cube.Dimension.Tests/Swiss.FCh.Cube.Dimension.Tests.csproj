@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-	<PackageId>FCh.Cube.Dimension.Tests</PackageId>
+	<PackageId>Swiss.FCh.Cube.Dimension.Tests</PackageId>
     </PropertyGroup>
 
     <PropertyGroup>
@@ -26,7 +26,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\FCh.Cube.Dimension\FCh.Cube.Dimension.csproj" />
+      <ProjectReference Include="..\Swiss.FCh.Cube.Dimension\Swiss.FCh.Cube.Dimension.csproj" />
     </ItemGroup>
 
 </Project>

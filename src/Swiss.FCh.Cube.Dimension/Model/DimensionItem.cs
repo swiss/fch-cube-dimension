@@ -1,6 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 
-namespace FCh.Cube.Dimension.Model;
+namespace Swiss.FCh.Cube.Dimension.Model;
 
 public class DimensionItem
 {

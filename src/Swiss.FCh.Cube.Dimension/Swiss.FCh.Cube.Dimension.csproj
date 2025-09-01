@@ -22,7 +22,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <InternalsVisibleTo Include="FCh.Cube.Dimension.Tests" />
+        <InternalsVisibleTo Include="Swiss.FCh.Cube.Dimension.Tests" />
     </ItemGroup>
 
 </Project>

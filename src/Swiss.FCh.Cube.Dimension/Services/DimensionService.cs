@@ -1,9 +1,9 @@
-using FCh.Cube.Dimension.Model;
-using FCh.Cube.Dimension.Contract;
-using FCh.Dimension.Model;
+using Swiss.FCh.Cube.Dimension.Model;
+using Swiss.FCh.Cube.Dimension.Contract;
+using Swiss.FCh.Dimension.Model;
 using VDS.RDF;
 
-namespace FCh.Cube.Dimension.Services;
+namespace Swiss.FCh.Cube.Dimension.Services;
 
 internal class DimensionService : IDimensionService
 {
