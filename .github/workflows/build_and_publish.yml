@@ -25,16 +25,16 @@ jobs:
         dotnet-version: 8.0.x
 
     - name: dotnet restore
-      run: dotnet restore src/FCh.Cube.Dimension.sln
+      run: dotnet restore src/Swiss.FCh.Cube.Dimension.sln
 
     - name: dotnet build
-      run: dotnet build src/FCh.Cube.Dimension.sln --configuration Release --no-restore
+      run: dotnet build src/Swiss.FCh.Cube.Dimension.sln --configuration Release --no-restore
 
     - name: dotnet test
-      run: dotnet test src/FCh.Cube.Dimension.sln --configuration Release --no-build --verbosity normal
+      run: dotnet test src/Swiss.FCh.Cube.Dimension.sln --configuration Release --no-build --verbosity normal
 
     - name: dotnet pack
-      run: dotnet pack src/FCh.Cube.Dimension/FCh.Cube.Dimension.csproj --configuration Release --no-build -o ./nupkgs /p:Version=${{ steps.get_version.outputs.version }}
+      run: dotnet pack src/Swiss.FCh.Cube.Dimension/Swiss.FCh.Cube.Dimension.csproj --configuration Release --no-build -o ./nupkgs /p:Version=${{ steps.get_version.outputs.version }}
 
     - name: dotnet nuget push
       run: dotnet nuget push ./nupkgs/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
