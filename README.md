@@ -8,7 +8,7 @@ Additional information can be found here: https://github.com/swiss/fch-cube
 # Contribution
 See: https://github.com/swiss/fch-cube/blob/main/CONTRIBUTING.md
 
-#Security
+# Security
 See: https://github.com/swiss/fch-cube/blob/main/SECURITY.md
 
 # Development Workflow
