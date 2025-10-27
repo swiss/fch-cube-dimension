@@ -3,6 +3,8 @@
 This library can be used to create RDF triples in the context of cubes (see: https://cube.link).
 The library should be used together with https://github.com/swiss/fch-cube-rawdata.
 
+The latest NuGet package is published at https://www.nuget.org/packages/Swiss.FCh.Cube.RawData.
+
 Additional information can be found here: https://github.com/swiss/fch-cube
 
 # Contribution
