@@ -1,9 +1,9 @@
+# Only consider tags that start with "v"
 tag_filter_pattern: '^v'
-sort: "desc"
+
+sort: "desc" #newest versions on top
+
+# Single catch-all section (no categorization)
 sections:
-  - title: "Features"
-    regexp: "^feat"
-  - title: "Fixes"
-    regexp: "^fix"
-  - title: "Maintenance"
-    regexp: "^(chore|refactor)"
+  - title: "Commits"
+    regexp: ".*"
