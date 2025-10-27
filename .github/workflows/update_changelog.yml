@@ -1,0 +1,34 @@
+name: Update Changelog
+
+on:
+  push:
+    tags:
+      - 'v*'  # Runs on any tag like v1.0.0, v2.3.1, etc.
+
+jobs:
+  update-changelog:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Important: need full git history + tags
+
+      - name: Install git-chglog
+        run: |
+          GIT_CHGLOG_VERSION=$(curl -s https://api.github.com/repos/git-chglog/git-chglog/releases/latest | grep tag_name | cut -d '"' -f 4)
+          curl -L "https://github.com/git-chglog/git-chglog/releases/download/${GIT_CHGLOG_VERSION}/git-chglog_${GIT_CHGLOG_VERSION#v}_linux_amd64.tar.gz" -o git-chglog.tar.gz
+          tar xf git-chglog.tar.gz
+          sudo mv git-chglog /usr/local/bin/
+
+      - name: Generate CHANGELOG.md
+        run: git-chglog -o CHANGELOG.md
+
+      - name: Commit and push changelog
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add CHANGELOG.md
+          git commit -m "chore: update changelog"
+          git push
