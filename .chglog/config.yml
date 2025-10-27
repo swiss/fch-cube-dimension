@@ -1,9 +1,0 @@
-# Only consider tags that start with "v"
-tag_filter_pattern: '^v'
-
-sort: "desc" #newest versions on top
-
-# Single catch-all section (no categorization)
-sections:
-  - title: "Commits"
-    regexp: ".*"
