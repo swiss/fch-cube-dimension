@@ -1,0 +1,9 @@
+tag_filter_pattern: '^v'
+sort: "desc"
+sections:
+  - title: "Features"
+    regexp: "^feat"
+  - title: "Fixes"
+    regexp: "^fix"
+  - title: "Maintenance"
+    regexp: "^(chore|refactor)"
