@@ -1,5 +1,8 @@
 # Changelog
 
+## Version 1.0.9
+feat: introduce Uri parameter to LingualLiteral
+
 ## Version 1.0.8
 chore: changed namespace to Swiss.FCh
 

@@ -20,7 +20,7 @@ internal class DimensionServiceTests
     [Test]
     public void CreateCube_WithMinimalParameters_CreatesTripleForDefinedTermSet()
     {
-        var graph = new Graph();
+        using var graph = new Graph();
         graph.BaseUri = new Uri("https://politics.ld.admin.ch/apg");
 
         var dimensionUri = "https://politics.ld.admin.ch/apg/person";
@@ -42,7 +42,7 @@ internal class DimensionServiceTests
     [Test]
     public void CreateCube_WithDefinedTermSetName_CreatesTriplesAccordingly()
     {
-        var graph = new Graph();
+        using var graph = new Graph();
         graph.BaseUri = new Uri("https://politics.ld.admin.ch/apg");
 
         var dimensionUri = "https://politics.ld.admin.ch/apg/person";
@@ -73,9 +73,51 @@ internal class DimensionServiceTests
     }
 
     [Test]
+    public void CreateCube_WithUriInLanguageLiteral_CreatesTriplesAccordingly()
+    {
+        using var graph = new Graph();
+        graph.BaseUri = new Uri("https://politics.ld.admin.ch/apg");
+
+        var dimensionUri = "https://politics.ld.admin.ch/apg/committee";
+
+        var dimensionItem = new DimensionItem(
+            1,
+            new LingualLiteral("Test Value", "de"),
+            new List<AdditionalLingualProperty> {
+                new("schema:url", new LingualLiteral("https://link.de", new Uri("http://www.w3.org/2001/XMLSchema#anyURI"))),
+                new("schema:url", new LingualLiteral("https://link.fr", new Uri("http://www.w3.org/2001/XMLSchema#anyURI")))
+            }
+        );
+
+        var triples =
+            _dimensionService.CreateDimension(
+                [dimensionItem],
+                graph,
+                dimensionUri).ToList();
+
+        Assert.That(triples, Is.Not.Null);
+        Assert.That(triples, Is.Not.Empty);
+
+        var dimensionNameTriples =
+            triples.Where(x =>
+                x.Subject.AsValuedNode().AsString().Contains(dimensionUri) &&
+                x.Predicate.AsValuedNode().AsString().Contains("http://schema.org/url")).ToList();
+
+        Assert.That(dimensionNameTriples, Has.Count.EqualTo(2));
+
+        Assert.Multiple(() =>
+        {
+            Assert.That(dimensionNameTriples.Any(x => x.Object.AsValuedNode().AsString() == "https://link.de"), Is.True);
+            Assert.That(dimensionNameTriples.Any(x => x.Object.ToSafeString() == "https://link.de^^http://www.w3.org/2001/XMLSchema#anyURI"), Is.True);
+            Assert.That(dimensionNameTriples.Any(x => x.Object.AsValuedNode().AsString() == "https://link.fr"), Is.True);
+            Assert.That(dimensionNameTriples.Any(x => x.Object.ToSafeString() == "https://link.fr^^http://www.w3.org/2001/XMLSchema#anyURI"), Is.True);
+        });
+    }
+
+    [Test]
     public void CreateCube_WithDimensionItemAndAdditionalProperties_CreatesTriplesAccordingly()
     {
-        var graph = new Graph();
+        using var graph = new Graph();
         graph.BaseUri = new Uri("https://politics.ld.admin.ch/apg");
 
         var dimensionUri = "https://politics.ld.admin.ch/apg/person";

@@ -60,10 +60,19 @@ public class LingualLiteral
 
     public string? LanguageTag { get; init; }
 
+    public Uri? DataType { get; init; }
+
     [SetsRequiredMembers]
     public LingualLiteral(string text, string? languageTag = null)
     {
         Text = text;
         LanguageTag = languageTag;
+    }
+
+    [SetsRequiredMembers]
+    public LingualLiteral(string text, Uri dataType)
+    {
+        Text = text;
+        DataType = dataType;
     }
 }
