@@ -1,5 +1,12 @@
 # Changelog
 
+## Version 1.0.10
+BREAKING CHANGE: multiple renamings
+- IDimensionService.CreateDimension() -> IDimensionService.CreateTriples()
+- DimensionItem.AdditionalLingualProperties -> DimensionItem.AdditionalLiteralProperties
+- AdditionalLingualProperty -> AdditionalLiteralProperty
+- LingualLiteral -> Literal
+
 ## Version 1.0.9
 feat: introduce Uri parameter to LingualLiteral
 
