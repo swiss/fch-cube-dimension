@@ -55,15 +55,15 @@ internal class DimensionService : IDimensionService
         AdditionalLiteralProperty additionalProperty,
         DimensionItem item)
     {
-        var obj =
-            additionalProperty.Object.LanguageTag != null
-                ? graph.CreateLiteralNode(additionalProperty.Object.Text, additionalProperty.Object.LanguageTag)
-                : graph.CreateLiteralNode(additionalProperty.Object.Text);
+        var obj = additionalProperty.Object.DataType != null ? graph.CreateLiteralNode(additionalProperty.Object.Text, additionalProperty.Object.DataType) :
+            additionalProperty.Object.LanguageTag != null ? graph.CreateLiteralNode(additionalProperty.Object.Text, additionalProperty.Object.LanguageTag) :
+            graph.CreateLiteralNode(additionalProperty.Object.Text);
 
         var additionalPropertyTriple = new Triple(
             graph.CreateUriNode(new Uri($"{dimensionUri}/{item.Key}")),
             graph.CreateUriNode(additionalProperty.Predicate),
             obj);
+
         return additionalPropertyTriple;
     }
 
