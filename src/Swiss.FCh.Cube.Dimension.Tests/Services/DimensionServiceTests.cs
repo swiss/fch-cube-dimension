@@ -1,15 +1,13 @@
 using Swiss.FCh.Cube.Dimension.Model;
 using Swiss.FCh.Cube.Dimension.Services;
-using Swiss.FCh.Cube.Dimension.Contract;
-using Swiss.FCh.Dimension.Model;
 using VDS.RDF;
 using VDS.RDF.Nodes;
 
 namespace Swiss.FCh.Cube.Dimension.Tests.Services;
 
-internal class DimensionServiceTests
+internal sealed class DimensionServiceTests
 {
-    private IDimensionService _dimensionService;
+    private DimensionService _dimensionService;
 
     [SetUp]
     public void Setup()
@@ -25,7 +23,7 @@ internal class DimensionServiceTests
 
         var dimensionUri = "https://politics.ld.admin.ch/apg/person";
 
-        var triples = _dimensionService.CreateDimension(new List<DimensionItem>(), graph, dimensionUri).ToList();
+        var triples = _dimensionService.CreateTriples(new List<DimensionItem>(), graph, dimensionUri).ToList();
 
         Assert.That(triples, Is.Not.Null);
         Assert.That(triples, Is.Not.Empty);
@@ -47,13 +45,13 @@ internal class DimensionServiceTests
 
         var dimensionUri = "https://politics.ld.admin.ch/apg/person";
 
-        List<LingualLiteral> dimensionName =
+        List<Literal> dimensionName =
             [
                 new("name de", "de"),
                 new("name fr", "fr")
             ];
 
-        var triples = _dimensionService.CreateDimension(new List<DimensionItem>(), graph, dimensionUri, dimensionName).ToList();
+        var triples = _dimensionService.CreateTriples(new List<DimensionItem>(), graph, dimensionUri, dimensionName).ToList();
 
         Assert.That(triples, Is.Not.Null);
         Assert.That(triples, Is.Not.Empty);
@@ -82,15 +80,15 @@ internal class DimensionServiceTests
 
         var dimensionItem = new DimensionItem(
             1,
-            new LingualLiteral("Test Value", "de"),
-            new List<AdditionalLingualProperty> {
-                new("schema:url", new LingualLiteral("https://link.de", new Uri("http://www.w3.org/2001/XMLSchema#anyURI"))),
-                new("schema:url", new LingualLiteral("https://link.fr", new Uri("http://www.w3.org/2001/XMLSchema#anyURI")))
+            new Literal("Test Value", "de"),
+            new List<AdditionalLiteralProperty> {
+                new("schema:url", new Literal("https://link.de", new Uri("http://www.w3.org/2001/XMLSchema#anyURI"))),
+                new("schema:url", new Literal("https://link.fr", new Uri("http://www.w3.org/2001/XMLSchema#anyURI")))
             }
         );
 
         var triples =
-            _dimensionService.CreateDimension(
+            _dimensionService.CreateTriples(
                 [dimensionItem],
                 graph,
                 dimensionUri).ToList();
@@ -100,8 +98,8 @@ internal class DimensionServiceTests
 
         var dimensionNameTriples =
             triples.Where(x =>
-                x.Subject.AsValuedNode().AsString().Contains(dimensionUri) &&
-                x.Predicate.AsValuedNode().AsString().Contains("http://schema.org/url")).ToList();
+                x.Subject.AsValuedNode().AsString().Contains(dimensionUri, StringComparison.InvariantCulture) &&
+                x.Predicate.AsValuedNode().AsString().Contains("http://schema.org/url", StringComparison.InvariantCulture)).ToList();
 
         Assert.That(dimensionNameTriples, Has.Count.EqualTo(2));
 
@@ -124,13 +122,13 @@ internal class DimensionServiceTests
 
         var dimensionItem = new DimensionItem(
             1,
-            new LingualLiteral("Hans Mustermann", "de"),
-            new List<AdditionalLingualProperty>{ new("schema:familyName", new LingualLiteral("Mustermann") )},
+            new Literal("Hans Mustermann", "de"),
+            new List<AdditionalLiteralProperty>{ new("schema:familyName", new Literal("Mustermann") )},
             new List<AdditionalUriProperty>{ new("schema:personGender", "schema:male") }
         );
 
         var triples =
-            _dimensionService.CreateDimension(
+            _dimensionService.CreateTriples(
                 [dimensionItem],
                 graph,
                 dimensionUri,
