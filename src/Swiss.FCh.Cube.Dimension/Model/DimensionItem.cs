@@ -6,34 +6,34 @@ public class DimensionItem
 {
     public required object Key { get; init; }
 
-    public required LingualLiteral Name { get; init; }
+    public required Literal Name { get; init; }
 
-    public List<AdditionalLingualProperty> AdditionalLingualProperties { get; } = new List<AdditionalLingualProperty>();
+    public List<AdditionalLiteralProperty> AdditionalLiteralProperties { get; } = new List<AdditionalLiteralProperty>();
 
     public List<AdditionalUriProperty> AdditionalUriProperties { get; } = new List<AdditionalUriProperty>();
 
     [SetsRequiredMembers]
     public DimensionItem(
         object key,
-        LingualLiteral name,
-        IList<AdditionalLingualProperty>? additionalProperties = null,
+        Literal name,
+        IList<AdditionalLiteralProperty>? additionalProperties = null,
         IList<AdditionalUriProperty>? additionalUriProperties = null)
     {
         Key = key;
         Name = name;
-        AdditionalLingualProperties.AddRange(additionalProperties ?? Enumerable.Empty<AdditionalLingualProperty>());
+        AdditionalLiteralProperties.AddRange(additionalProperties ?? Enumerable.Empty<AdditionalLiteralProperty>());
         AdditionalUriProperties.AddRange(additionalUriProperties ?? Enumerable.Empty<AdditionalUriProperty>());
     }
 }
 
-public class AdditionalLingualProperty
+public class AdditionalLiteralProperty
 {
     public required string Predicate { get; init; }
 
-    public required LingualLiteral Object  { get; init; }
+    public required Literal Object  { get; init; }
 
     [SetsRequiredMembers]
-    public AdditionalLingualProperty(string predicate, LingualLiteral obj)
+    public AdditionalLiteralProperty(string predicate, Literal obj)
     {
         Predicate = predicate;
         Object = obj;
@@ -54,7 +54,7 @@ public class AdditionalUriProperty
     }
 }
 
-public class LingualLiteral
+public class Literal
 {
     public required string Text { get; init; }
 
@@ -63,14 +63,14 @@ public class LingualLiteral
     public Uri? DataType { get; init; }
 
     [SetsRequiredMembers]
-    public LingualLiteral(string text, string? languageTag = null)
+    public Literal(string text, string? languageTag = null)
     {
         Text = text;
         LanguageTag = languageTag;
     }
 
     [SetsRequiredMembers]
-    public LingualLiteral(string text, Uri dataType)
+    public Literal(string text, Uri dataType)
     {
         Text = text;
         DataType = dataType;

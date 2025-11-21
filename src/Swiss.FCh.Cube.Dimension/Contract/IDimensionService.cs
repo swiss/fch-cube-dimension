@@ -17,11 +17,11 @@ public interface IDimensionService
     /// <param name="additionalRdfNamespaces">List of RDF additional namespaces to add to the graph ("schema" and "rdf" are added by the library).</param>
     /// <param name="rdfTypes">RDF types (e.g. http://schema.org/Person)</param>
     /// <returns>All the triples forming the dimension</returns>
-    public IEnumerable<Triple> CreateDimension(
+    public IEnumerable<Triple> CreateTriples(
         IEnumerable<DimensionItem> items,
         Graph graph,
         string dimensionUri,
-        IList<LingualLiteral>? dimensionName = null,
+        IList<Literal>? dimensionName = null,
         IList<RdfNamespace>? additionalRdfNamespaces = null,
         IList<string>? rdfTypes = null);
 }

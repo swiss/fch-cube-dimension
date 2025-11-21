@@ -7,11 +7,11 @@ namespace Swiss.FCh.Cube.Dimension.Services;
 
 internal class DimensionService : IDimensionService
 {
-    public IEnumerable<Triple> CreateDimension(
+    public IEnumerable<Triple> CreateTriples(
         IEnumerable<DimensionItem> items,
         Graph graph,
         string dimensionUri,
-        IList<LingualLiteral>? dimensionName = null,
+        IList<Literal>? dimensionName = null,
         IList<RdfNamespace>? additionalRdfNamespaces = null,
         IList<string>? rdfTypes = null)
     {
@@ -19,7 +19,7 @@ internal class DimensionService : IDimensionService
 
         yield return CreateDefinedTermSet(graph, dimensionUri);
 
-        foreach (var name in dimensionName ?? Enumerable.Empty<LingualLiteral>())
+        foreach (var name in dimensionName ?? Enumerable.Empty<Literal>())
         {
             yield return CreateDefinedTermSetName(graph, dimensionUri, name);
         }
@@ -37,9 +37,9 @@ internal class DimensionService : IDimensionService
 
             yield return CreateSchemaName(graph, dimensionUri, item);
 
-            foreach (var additionalProperty in item.AdditionalLingualProperties)
+            foreach (var additionalProperty in item.AdditionalLiteralProperties)
             {
-                yield return CreateTripleForAdditionalLingualProperty(graph, dimensionUri, additionalProperty, item);
+                yield return CreateTripleForAdditionalLiteralProperty(graph, dimensionUri, additionalProperty, item);
             }
 
             foreach (var additionalUriProperty in item.AdditionalUriProperties)
@@ -49,21 +49,21 @@ internal class DimensionService : IDimensionService
         }
     }
 
-    private static Triple CreateTripleForAdditionalLingualProperty(
+    private static Triple CreateTripleForAdditionalLiteralProperty(
         Graph graph,
         string dimensionUri,
-        AdditionalLingualProperty additionalProperty,
+        AdditionalLiteralProperty additionalProperty,
         DimensionItem item)
     {
-        var obj = additionalProperty.Object.DataType != null ? graph.CreateLiteralNode(additionalProperty.Object.Text, additionalProperty.Object.DataType) :
-            additionalProperty.Object.LanguageTag != null ? graph.CreateLiteralNode(additionalProperty.Object.Text, additionalProperty.Object.LanguageTag) :
-            graph.CreateLiteralNode(additionalProperty.Object.Text);
+        var obj =
+            additionalProperty.Object.LanguageTag != null
+                ? graph.CreateLiteralNode(additionalProperty.Object.Text, additionalProperty.Object.LanguageTag)
+                : graph.CreateLiteralNode(additionalProperty.Object.Text);
 
         var additionalPropertyTriple = new Triple(
             graph.CreateUriNode(new Uri($"{dimensionUri}/{item.Key}")),
             graph.CreateUriNode(additionalProperty.Predicate),
             obj);
-
         return additionalPropertyTriple;
     }
 
@@ -113,7 +113,7 @@ internal class DimensionService : IDimensionService
             graph.CreateUriNode(new Uri(rdfType)));
     }
 
-    private static Triple CreateDefinedTermSetName(Graph graph, string dimensionUri, LingualLiteral name)
+    private static Triple CreateDefinedTermSetName(Graph graph, string dimensionUri, Literal name)
     {
         var obj =
             name.LanguageTag != null
