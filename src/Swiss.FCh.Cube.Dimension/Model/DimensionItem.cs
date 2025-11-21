@@ -1,78 +1,76 @@
-using System.Diagnostics.CodeAnalysis;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace Swiss.FCh.Cube.Dimension.Model;
-
-public class DimensionItem
+namespace Swiss.FCh.Cube.Dimension.Model
 {
-    public required object Key { get; init; }
-
-    public required Literal Name { get; init; }
-
-    public List<AdditionalLiteralProperty> AdditionalLiteralProperties { get; } = new List<AdditionalLiteralProperty>();
-
-    public List<AdditionalUriProperty> AdditionalUriProperties { get; } = new List<AdditionalUriProperty>();
-
-    [SetsRequiredMembers]
-    public DimensionItem(
-        object key,
-        Literal name,
-        IList<AdditionalLiteralProperty>? additionalProperties = null,
-        IList<AdditionalUriProperty>? additionalUriProperties = null)
+    public class DimensionItem
     {
-        Key = key;
-        Name = name;
-        AdditionalLiteralProperties.AddRange(additionalProperties ?? Enumerable.Empty<AdditionalLiteralProperty>());
-        AdditionalUriProperties.AddRange(additionalUriProperties ?? Enumerable.Empty<AdditionalUriProperty>());
-    }
-}
+        public object Key { get; set; }
 
-public class AdditionalLiteralProperty
-{
-    public required string Predicate { get; init; }
+        public Literal Name { get; set; }
 
-    public required Literal Object  { get; init; }
+        public List<AdditionalLiteralProperty> AdditionalLiteralProperties { get; } = new List<AdditionalLiteralProperty>();
 
-    [SetsRequiredMembers]
-    public AdditionalLiteralProperty(string predicate, Literal obj)
-    {
-        Predicate = predicate;
-        Object = obj;
-    }
-}
+        public List<AdditionalUriProperty> AdditionalUriProperties { get; } = new List<AdditionalUriProperty>();
 
-public class AdditionalUriProperty
-{
-    public required string Predicate { get; init; }
-
-    public required string Object { get; init; }
-
-    [SetsRequiredMembers]
-    public AdditionalUriProperty(string predicate, string obj)
-    {
-        Predicate = predicate;
-        Object = obj;
-    }
-}
-
-public class Literal
-{
-    public required string Text { get; init; }
-
-    public string? LanguageTag { get; init; }
-
-    public Uri? DataType { get; init; }
-
-    [SetsRequiredMembers]
-    public Literal(string text, string? languageTag = null)
-    {
-        Text = text;
-        LanguageTag = languageTag;
+        public DimensionItem(
+            object key,
+            Literal name,
+            IList<AdditionalLiteralProperty> additionalProperties = null,
+            IList<AdditionalUriProperty> additionalUriProperties = null)
+        {
+            Key = key;
+            Name = name;
+            AdditionalLiteralProperties.AddRange(additionalProperties ?? Enumerable.Empty<AdditionalLiteralProperty>());
+            AdditionalUriProperties.AddRange(additionalUriProperties ?? Enumerable.Empty<AdditionalUriProperty>());
+        }
     }
 
-    [SetsRequiredMembers]
-    public Literal(string text, Uri dataType)
+    public class AdditionalLiteralProperty
     {
-        Text = text;
-        DataType = dataType;
+        public string Predicate { get; set; }
+
+        public Literal Object { get; set; }
+
+        public AdditionalLiteralProperty(string predicate, Literal obj)
+        {
+            Predicate = predicate;
+            Object = obj;
+        }
+    }
+
+    public class AdditionalUriProperty
+    {
+        public string Predicate { get; set; }
+
+        public string Object { get; set; }
+
+        public AdditionalUriProperty(string predicate, string obj)
+        {
+            Predicate = predicate;
+            Object = obj;
+        }
+    }
+
+    public class Literal
+    {
+        public string Text { get; set; }
+
+        public string LanguageTag { get; set; }
+
+        public Uri DataType { get; set; }
+
+        public Literal(string text, string languageTag = null)
+        {
+            Text = text;
+            LanguageTag = languageTag;
+        }
+
+        public Literal(string text, Uri dataType)
+        {
+            Text = text;
+            DataType = dataType;
+        }
     }
 }

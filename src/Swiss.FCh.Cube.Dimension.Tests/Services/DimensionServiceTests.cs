@@ -1,15 +1,13 @@
 using Swiss.FCh.Cube.Dimension.Model;
 using Swiss.FCh.Cube.Dimension.Services;
-using Swiss.FCh.Cube.Dimension.Contract;
-using Swiss.FCh.Dimension.Model;
 using VDS.RDF;
 using VDS.RDF.Nodes;
 
 namespace Swiss.FCh.Cube.Dimension.Tests.Services;
 
-internal class DimensionServiceTests
+internal sealed class DimensionServiceTests
 {
-    private IDimensionService _dimensionService;
+    private DimensionService _dimensionService;
 
     [SetUp]
     public void Setup()
@@ -100,8 +98,8 @@ internal class DimensionServiceTests
 
         var dimensionNameTriples =
             triples.Where(x =>
-                x.Subject.AsValuedNode().AsString().Contains(dimensionUri) &&
-                x.Predicate.AsValuedNode().AsString().Contains("http://schema.org/url")).ToList();
+                x.Subject.AsValuedNode().AsString().Contains(dimensionUri, StringComparison.InvariantCulture) &&
+                x.Predicate.AsValuedNode().AsString().Contains("http://schema.org/url", StringComparison.InvariantCulture)).ToList();
 
         Assert.That(dimensionNameTriples, Has.Count.EqualTo(2));
 
