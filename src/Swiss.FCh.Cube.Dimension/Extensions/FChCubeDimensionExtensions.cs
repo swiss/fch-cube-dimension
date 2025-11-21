@@ -2,16 +2,17 @@ using Swiss.FCh.Cube.Dimension.Services;
 using Swiss.FCh.Cube.Dimension.Contract;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Swiss.FCh.Cube.Dimension.Extensions;
-
-// ReSharper disable once UnusedType.Global : Used by the library's consumers
-public static class FChCubeDimensionExtensions
+namespace Swiss.FCh.Cube.Dimension.Extensions
 {
-    // ReSharper disable once UnusedMember.Global : Used by the library's consumers
-    public static IServiceCollection AddDimesionService(this IServiceCollection services)
+// ReSharper disable once UnusedType.Global : Used by the library's consumers
+    public static class FChCubeDimensionExtensions
     {
-        services.AddScoped<IDimensionService, DimensionService>();
+        // ReSharper disable once UnusedMember.Global : Used by the library's consumers
+        public static IServiceCollection AddDimesionService(this IServiceCollection services)
+        {
+            services.AddScoped<IDimensionService, DimensionService>();
 
-        return services;
+            return services;
+        }
     }
 }

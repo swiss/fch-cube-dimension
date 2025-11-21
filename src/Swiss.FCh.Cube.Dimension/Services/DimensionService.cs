@@ -1,154 +1,157 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Swiss.FCh.Cube.Dimension.Model;
 using Swiss.FCh.Cube.Dimension.Contract;
-using Swiss.FCh.Dimension.Model;
 using VDS.RDF;
 
-namespace Swiss.FCh.Cube.Dimension.Services;
-
-internal class DimensionService : IDimensionService
+namespace Swiss.FCh.Cube.Dimension.Services
 {
-    public IEnumerable<Triple> CreateTriples(
-        IEnumerable<DimensionItem> items,
-        Graph graph,
-        string dimensionUri,
-        IList<Literal>? dimensionName = null,
-        IList<RdfNamespace>? additionalRdfNamespaces = null,
-        IList<string>? rdfTypes = null)
+    internal class DimensionService : IDimensionService
     {
-        AddRdfNamespaces(graph, additionalRdfNamespaces);
-
-        yield return CreateDefinedTermSet(graph, dimensionUri);
-
-        foreach (var name in dimensionName ?? Enumerable.Empty<Literal>())
+        public IEnumerable<Triple> CreateTriples(
+            IEnumerable<DimensionItem> items,
+            Graph graph,
+            string dimensionUri,
+            IList<Literal> dimensionName = null,
+            IList<RdfNamespace> additionalRdfNamespaces = null,
+            IList<string> rdfTypes = null)
         {
-            yield return CreateDefinedTermSetName(graph, dimensionUri, name);
-        }
+            AddRdfNamespaces(graph, additionalRdfNamespaces);
 
-        foreach (var item in items)
-        {
-            foreach (var rdfType in rdfTypes ?? Enumerable.Empty<string>())
+            yield return CreateDefinedTermSet(graph, dimensionUri);
+
+            foreach (var name in dimensionName ?? Enumerable.Empty<Literal>())
             {
-                yield return CreateRdfType(graph, dimensionUri, rdfType, item);
+                yield return CreateDefinedTermSetName(graph, dimensionUri, name);
             }
 
-            yield return CreateHasDefinedTermSet(graph, dimensionUri, item);
-
-            yield return CreateInDefinedTermSet(graph, dimensionUri, item);
-
-            yield return CreateSchemaName(graph, dimensionUri, item);
-
-            foreach (var additionalProperty in item.AdditionalLiteralProperties)
+            foreach (var item in items)
             {
-                yield return CreateTripleForAdditionalLiteralProperty(graph, dimensionUri, additionalProperty, item);
-            }
+                foreach (var rdfType in rdfTypes ?? Enumerable.Empty<string>())
+                {
+                    yield return CreateRdfType(graph, dimensionUri, rdfType, item);
+                }
 
-            foreach (var additionalUriProperty in item.AdditionalUriProperties)
-            {
-                yield return CreateTripleForAdditionalUriProperty(graph, dimensionUri, additionalUriProperty, item);
+                yield return CreateHasDefinedTermSet(graph, dimensionUri, item);
+
+                yield return CreateInDefinedTermSet(graph, dimensionUri, item);
+
+                yield return CreateSchemaName(graph, dimensionUri, item);
+
+                foreach (var additionalProperty in item.AdditionalLiteralProperties)
+                {
+                    yield return CreateTripleForAdditionalLiteralProperty(graph, dimensionUri, additionalProperty, item);
+                }
+
+                foreach (var additionalUriProperty in item.AdditionalUriProperties)
+                {
+                    yield return CreateTripleForAdditionalUriProperty(graph, dimensionUri, additionalUriProperty, item);
+                }
             }
         }
-    }
 
-    private static Triple CreateTripleForAdditionalLiteralProperty(
-        Graph graph,
-        string dimensionUri,
-        AdditionalLiteralProperty additionalProperty,
-        DimensionItem item)
-    {
-        var obj = additionalProperty.Object.DataType != null ? graph.CreateLiteralNode(additionalProperty.Object.Text, additionalProperty.Object.DataType) :
-            additionalProperty.Object.LanguageTag != null ? graph.CreateLiteralNode(additionalProperty.Object.Text, additionalProperty.Object.LanguageTag) :
-            graph.CreateLiteralNode(additionalProperty.Object.Text);
-
-        var additionalPropertyTriple = new Triple(
-            graph.CreateUriNode(new Uri($"{dimensionUri}/{item.Key}")),
-            graph.CreateUriNode(additionalProperty.Predicate),
-            obj);
-
-        return additionalPropertyTriple;
-    }
-
-    private static Triple CreateTripleForAdditionalUriProperty(
-        Graph graph,
-        string dimensionUri,
-        AdditionalUriProperty additionalProperty,
-        DimensionItem item)
-    {
-        var additionalPropertyTriple = new Triple(
-            graph.CreateUriNode(new Uri($"{dimensionUri}/{item.Key}")),
-            graph.CreateUriNode(additionalProperty.Predicate),
-            graph.CreateUriNode(additionalProperty.Object));
-
-        return additionalPropertyTriple;
-    }
-
-    private static Triple CreateSchemaName(Graph graph, string dimensionUri, DimensionItem item)
-    {
-        return new Triple(
-            graph.CreateUriNode(new Uri($"{dimensionUri}/{item.Key}")),
-            graph.CreateUriNode("schema:name"),
-            graph.CreateLiteralNode(item.Name.Text, item.Name.LanguageTag));
-    }
-
-    private static Triple CreateInDefinedTermSet(Graph graph, string dimensionUri, DimensionItem item)
-    {
-        return new Triple(
-            graph.CreateUriNode(new Uri($"{dimensionUri}/{item.Key}")),
-            graph.CreateUriNode("schema:inDefinedTermSet"),
-            graph.CreateUriNode(new Uri(dimensionUri)));
-    }
-
-    private static Triple CreateHasDefinedTermSet(Graph graph, string dimensionUri, DimensionItem item)
-    {
-        return new Triple(
-            graph.CreateUriNode(new Uri(dimensionUri)),
-            graph.CreateUriNode("schema:hasDefinedTerm"),
-            graph.CreateUriNode(new Uri($"{dimensionUri}/{item.Key}")));
-    }
-
-    private static Triple CreateRdfType(Graph graph, string dimensionUri, string rdfType, DimensionItem item)
-    {
-        return new Triple(
-            graph.CreateUriNode(new Uri($"{dimensionUri}/{item.Key}")),
-            graph.CreateUriNode("rdf:type"),
-            graph.CreateUriNode(new Uri(rdfType)));
-    }
-
-    private static Triple CreateDefinedTermSetName(Graph graph, string dimensionUri, Literal name)
-    {
-        var obj =
-            name.LanguageTag != null
-                ? graph.CreateLiteralNode(name.Text, name.LanguageTag)
-                : graph.CreateLiteralNode(name.Text);
-
-        var definedTermSetName = new Triple(
-            graph.CreateUriNode(new Uri(dimensionUri)),
-            graph.CreateUriNode("schema:name"),
-            obj);
-
-        return definedTermSetName;
-    }
-
-    private static Triple CreateDefinedTermSet(Graph graph, string dimensionUri)
-    {
-        return new Triple(
-            graph.CreateUriNode(new Uri(dimensionUri)),
-            graph.CreateUriNode("rdf:type"),
-            graph.CreateUriNode("schema:DefinedTermSet"));
-    }
-
-    private static void AddRdfNamespaces(Graph graph, IList<RdfNamespace>? additionalRdfNamespaces)
-    {
-        AddRdfNamespace(graph, RdfNamespace.Rdf);
-        AddRdfNamespace(graph, RdfNamespace.Schema);
-
-        foreach (var rdfNamespace in additionalRdfNamespaces ?? Enumerable.Empty<RdfNamespace>())
+        private static Triple CreateTripleForAdditionalLiteralProperty(
+            Graph graph,
+            string dimensionUri,
+            AdditionalLiteralProperty additionalProperty,
+            DimensionItem item)
         {
-            AddRdfNamespace(graph, rdfNamespace);
-        }
-    }
+            var obj = additionalProperty.Object.DataType != null ? graph.CreateLiteralNode(additionalProperty.Object.Text, additionalProperty.Object.DataType) :
+                additionalProperty.Object.LanguageTag != null ? graph.CreateLiteralNode(additionalProperty.Object.Text, additionalProperty.Object.LanguageTag) :
+                graph.CreateLiteralNode(additionalProperty.Object.Text);
 
-    private static void AddRdfNamespace(Graph graph, RdfNamespace rdfNamespace)
-    {
-        graph.NamespaceMap.AddNamespace(rdfNamespace.Prefix, new Uri(rdfNamespace.Uri));
+            var additionalPropertyTriple = new Triple(
+                graph.CreateUriNode(new Uri($"{dimensionUri}/{item.Key}")),
+                graph.CreateUriNode(additionalProperty.Predicate),
+                obj);
+
+            return additionalPropertyTriple;
+        }
+
+        private static Triple CreateTripleForAdditionalUriProperty(
+            Graph graph,
+            string dimensionUri,
+            AdditionalUriProperty additionalProperty,
+            DimensionItem item)
+        {
+            var additionalPropertyTriple = new Triple(
+                graph.CreateUriNode(new Uri($"{dimensionUri}/{item.Key}")),
+                graph.CreateUriNode(additionalProperty.Predicate),
+                graph.CreateUriNode(additionalProperty.Object));
+
+            return additionalPropertyTriple;
+        }
+
+        private static Triple CreateSchemaName(Graph graph, string dimensionUri, DimensionItem item)
+        {
+            return new Triple(
+                graph.CreateUriNode(new Uri($"{dimensionUri}/{item.Key}")),
+                graph.CreateUriNode("schema:name"),
+                graph.CreateLiteralNode(item.Name.Text, item.Name.LanguageTag));
+        }
+
+        private static Triple CreateInDefinedTermSet(Graph graph, string dimensionUri, DimensionItem item)
+        {
+            return new Triple(
+                graph.CreateUriNode(new Uri($"{dimensionUri}/{item.Key}")),
+                graph.CreateUriNode("schema:inDefinedTermSet"),
+                graph.CreateUriNode(new Uri(dimensionUri)));
+        }
+
+        private static Triple CreateHasDefinedTermSet(Graph graph, string dimensionUri, DimensionItem item)
+        {
+            return new Triple(
+                graph.CreateUriNode(new Uri(dimensionUri)),
+                graph.CreateUriNode("schema:hasDefinedTerm"),
+                graph.CreateUriNode(new Uri($"{dimensionUri}/{item.Key}")));
+        }
+
+        private static Triple CreateRdfType(Graph graph, string dimensionUri, string rdfType, DimensionItem item)
+        {
+            return new Triple(
+                graph.CreateUriNode(new Uri($"{dimensionUri}/{item.Key}")),
+                graph.CreateUriNode("rdf:type"),
+                graph.CreateUriNode(new Uri(rdfType)));
+        }
+
+        private static Triple CreateDefinedTermSetName(Graph graph, string dimensionUri, Literal name)
+        {
+            var obj =
+                name.LanguageTag != null
+                    ? graph.CreateLiteralNode(name.Text, name.LanguageTag)
+                    : graph.CreateLiteralNode(name.Text);
+
+            var definedTermSetName = new Triple(
+                graph.CreateUriNode(new Uri(dimensionUri)),
+                graph.CreateUriNode("schema:name"),
+                obj);
+
+            return definedTermSetName;
+        }
+
+        private static Triple CreateDefinedTermSet(Graph graph, string dimensionUri)
+        {
+            return new Triple(
+                graph.CreateUriNode(new Uri(dimensionUri)),
+                graph.CreateUriNode("rdf:type"),
+                graph.CreateUriNode("schema:DefinedTermSet"));
+        }
+
+        private static void AddRdfNamespaces(Graph graph, IList<RdfNamespace> additionalRdfNamespaces)
+        {
+            AddRdfNamespace(graph, RdfNamespace.Rdf);
+            AddRdfNamespace(graph, RdfNamespace.Schema);
+
+            foreach (var rdfNamespace in additionalRdfNamespaces ?? Enumerable.Empty<RdfNamespace>())
+            {
+                AddRdfNamespace(graph, rdfNamespace);
+            }
+        }
+
+        private static void AddRdfNamespace(Graph graph, RdfNamespace rdfNamespace)
+        {
+            graph.NamespaceMap.AddNamespace(rdfNamespace.Prefix, new Uri(rdfNamespace.Uri));
+        }
     }
 }
