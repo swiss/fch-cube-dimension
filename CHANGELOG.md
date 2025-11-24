@@ -1,11 +1,13 @@
 # Changelog
 
-## Version 1.0.10
+## Version 2.0.0
 BREAKING CHANGE: multiple renamings
 - IDimensionService.CreateDimension() -> IDimensionService.CreateTriples()
 - DimensionItem.AdditionalLingualProperties -> DimensionItem.AdditionalLiteralProperties
 - AdditionalLingualProperty -> AdditionalLiteralProperty
 - LingualLiteral -> Literal
+
+Static code analysis (Roslyn rules) enabled.
 
 ## Version 1.0.9
 feat: introduce Uri parameter to LingualLiteral
