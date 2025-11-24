@@ -8,7 +8,7 @@ namespace Swiss.FCh.Cube.Dimension.Contract
     {
         /// <summary>
         /// This method converts the provided input into triples forming a dimension according to https://cube.link/.
-        /// Writing these triples to a remote sparql endpoint is the responsibility of the application using this library.
+        /// Writing these triples to a remote sparql endpoint is the responsibility of the client using this library.
         /// </summary>
         /// <param name="items">The items that should be added to the dimension (e.g. People, Departments, etc.).</param>
         /// <param name="graph">RDF graph used to create the triples. The graph's 'BaseUrl' must be specified./></param>
