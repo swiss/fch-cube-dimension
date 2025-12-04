@@ -10,8 +10,7 @@ namespace Swiss.FCh.Cube.Dimension.Extensions
 
     public static class FChCubeDimensionExtensions
     {
-
-        public static IServiceCollection AddDimesionService(this IServiceCollection services)
+        public static IServiceCollection AddDimensionService(this IServiceCollection services)
         {
             services.AddScoped<IDimensionService, DimensionService>();
 

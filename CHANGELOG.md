@@ -2,6 +2,7 @@
 
 ## Version 2.0.1
 
+BREAKING CHANGE: renaming AddDimesionService -> AddDimensionService
 feat: dynamic dependency injection
 
 ## Version 2.0.0
