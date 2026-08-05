@@ -2,3 +2,4 @@ dotnet_diagnostic.CA1002.severity = none
 dotnet_diagnostic.CA1056.severity = none
 dotnet_diagnostic.CA1720.severity = none
 dotnet_diagnostic.CA1054.severity = none
+dotnet_diagnostic.S1075.severity = none #hard coded URIs are ok in the context of RDF
