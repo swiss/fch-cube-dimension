@@ -5,7 +5,7 @@ using System.Linq;
 namespace Swiss.FCh.Cube.Dimension.Model
 {
     /// <summary>
-    /// Use this class to describe your "dimension" according to https://cube.link.
+    /// Use this class to describe your "dimension" according to <a href="https://cube.link">https://cube.link</a>.
     /// Pass these objects to the <see cref="Swiss.FCh.Cube.Dimension.Contract.IDimensionService"/> to create the tripels for the dimension.
     /// </summary>
     public class DimensionItem
