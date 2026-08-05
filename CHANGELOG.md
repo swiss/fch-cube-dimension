@@ -1,5 +1,8 @@
 # Changelog
 
+## Version 2.0.2
+XML comments for public members added.
+
 ## Version 2.0.1
 
 BREAKING CHANGE: renaming AddDimesionService -> AddDimensionService
