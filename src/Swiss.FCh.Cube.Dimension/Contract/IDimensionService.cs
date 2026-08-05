@@ -4,6 +4,9 @@ using VDS.RDF;
 
 namespace Swiss.FCh.Cube.Dimension.Contract
 {
+    /// <summary>
+    /// This service is used to create a "dimension" according to the https://cube.link schema.
+    /// </summary>
     public interface IDimensionService
     {
         /// <summary>

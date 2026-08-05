@@ -14,6 +14,10 @@
         <TargetFramework>netstandard2.0</TargetFramework>
     </PropertyGroup>
 
+    <PropertyGroup>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    </PropertyGroup>
+
     <ItemGroup>
       <PackageReference Include="dotNetRdf" Version="3.4.1" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.0" />
