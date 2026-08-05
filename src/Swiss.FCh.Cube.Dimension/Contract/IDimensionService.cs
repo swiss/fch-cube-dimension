@@ -5,12 +5,12 @@ using VDS.RDF;
 namespace Swiss.FCh.Cube.Dimension.Contract
 {
     /// <summary>
-    /// This service is used to create a "dimension" according to the https://cube.link schema.
+    /// This service is used to create a "dimension" according to the <a href="https://cube.link">https://cube.link</a> schema.
     /// </summary>
     public interface IDimensionService
     {
         /// <summary>
-        /// This method converts the provided input into triples forming a dimension according to https://cube.link/.
+        /// This method converts the provided input into triples forming a dimension according to <a href="https://cube.link">https://cube.link</a>.
         /// Writing these triples to a remote sparql endpoint is the responsibility of the client using this library.
         /// </summary>
         /// <param name="items">The items that should be added to the dimension (e.g. People, Departments, etc.).</param>
