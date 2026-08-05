@@ -57,9 +57,19 @@ namespace Swiss.FCh.Cube.Dimension.Services
             AdditionalLiteralProperty additionalProperty,
             DimensionItem item)
         {
-            var obj = additionalProperty.Object.DataType != null ? graph.CreateLiteralNode(additionalProperty.Object.Text, additionalProperty.Object.DataType) :
-                additionalProperty.Object.LanguageTag != null ? graph.CreateLiteralNode(additionalProperty.Object.Text, additionalProperty.Object.LanguageTag) :
-                graph.CreateLiteralNode(additionalProperty.Object.Text);
+            ILiteralNode obj;
+
+            if (additionalProperty.Object.DataType != null)
+            {
+                obj = graph.CreateLiteralNode(additionalProperty.Object.Text, additionalProperty.Object.DataType);
+            }
+            else
+            {
+                obj =
+                    additionalProperty.Object.LanguageTag != null
+                        ? graph.CreateLiteralNode(additionalProperty.Object.Text, additionalProperty.Object.LanguageTag)
+                        : graph.CreateLiteralNode(additionalProperty.Object.Text);
+            }
 
             var additionalPropertyTriple = new Triple(
                 graph.CreateUriNode(new Uri($"{dimensionUri}/{item.Key}")),
