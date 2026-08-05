@@ -63,11 +63,11 @@ internal sealed class DimensionServiceTests
 
         Assert.That(dimensionNameTriples, Has.Count.EqualTo(2));
 
-        Assert.Multiple(() =>
+        using (Assert.EnterMultipleScope())
         {
             Assert.That(dimensionNameTriples.Any(x => x.Object.AsValuedNode().AsString() == "name de"), Is.True);
             Assert.That(dimensionNameTriples.Any(x => x.Object.AsValuedNode().AsString() == "name fr"), Is.True);
-        });
+        }
     }
 
     [Test]
@@ -103,13 +103,13 @@ internal sealed class DimensionServiceTests
 
         Assert.That(dimensionNameTriples, Has.Count.EqualTo(2));
 
-        Assert.Multiple(() =>
+        using (Assert.EnterMultipleScope())
         {
             Assert.That(dimensionNameTriples.Any(x => x.Object.AsValuedNode().AsString() == "https://link.de"), Is.True);
             Assert.That(dimensionNameTriples.Any(x => x.Object.ToSafeString() == "https://link.de^^http://www.w3.org/2001/XMLSchema#anyURI"), Is.True);
             Assert.That(dimensionNameTriples.Any(x => x.Object.AsValuedNode().AsString() == "https://link.fr"), Is.True);
             Assert.That(dimensionNameTriples.Any(x => x.Object.ToSafeString() == "https://link.fr^^http://www.w3.org/2001/XMLSchema#anyURI"), Is.True);
-        });
+        }
     }
 
     [Test]
@@ -154,11 +154,12 @@ internal sealed class DimensionServiceTests
         var inDefinedTermSetTriple = triples.SingleOrDefault(x => x.Predicate.AsValuedNode().AsString() == $"{RdfNamespace.Schema.Uri}/inDefinedTermSet");
 
         Assert.That(inDefinedTermSetTriple, Is.Not.Null);
-        Assert.Multiple(() =>
+
+        using (Assert.EnterMultipleScope())
         {
             Assert.That(inDefinedTermSetTriple.Subject.AsValuedNode().AsString(), Is.EqualTo($"{dimensionUri}/1"));
             Assert.That(inDefinedTermSetTriple.Object.AsValuedNode().AsString(), Is.EqualTo(dimensionUri));
-        });
+        }
 
         var nameTriple =
             triples.SingleOrDefault(x =>
