@@ -1,5 +1,8 @@
 # Changelog
 
+## Version 2.0.3
+Dependencies upgrade
+
 ## Version 2.0.2
 XML comments for public members added.
 
