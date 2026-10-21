@@ -106,9 +106,9 @@ internal sealed class DimensionServiceTests
         using (Assert.EnterMultipleScope())
         {
             Assert.That(dimensionNameTriples.Any(x => x.Object.AsValuedNode().AsString() == "https://link.de"), Is.True);
-            Assert.That(dimensionNameTriples.Any(x => x.Object.ToSafeString() == "https://link.de^^http://www.w3.org/2001/XMLSchema#anyURI"), Is.True);
+            Assert.That(dimensionNameTriples.Any(x => x.Object.ToString() == "https://link.de^^http://www.w3.org/2001/XMLSchema#anyURI"), Is.True);
             Assert.That(dimensionNameTriples.Any(x => x.Object.AsValuedNode().AsString() == "https://link.fr"), Is.True);
-            Assert.That(dimensionNameTriples.Any(x => x.Object.ToSafeString() == "https://link.fr^^http://www.w3.org/2001/XMLSchema#anyURI"), Is.True);
+            Assert.That(dimensionNameTriples.Any(x => x.Object.ToString() == "https://link.fr^^http://www.w3.org/2001/XMLSchema#anyURI"), Is.True);
         }
     }
 

@@ -19,8 +19,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="dotNetRdf" Version="3.4.1" />
-      <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.0" />
+      <PackageReference Include="dotNetRdf" Version="3.5.2" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.13" />
     </ItemGroup>
 
     <ItemGroup Condition=" $(TargetFramework.StartsWith('net8')) ">
@@ -28,7 +28,7 @@
     </ItemGroup>
 
     <ItemGroup Condition=" $(TargetFramework.StartsWith('net9')) ">
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.18" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.21" />
     </ItemGroup>
 
     <ItemGroup Condition=" $(TargetFramework.StartsWith('net10')) ">
@@ -36,15 +36,15 @@
     </ItemGroup>
 
     <ItemGroup Condition=" $(TargetFramework.StartsWith('net481')) ">
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.10" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.13" />
     </ItemGroup>
 
     <ItemGroup Condition=" $(TargetFramework.StartsWith('netstandard2.1')) ">
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.10" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.13" />
     </ItemGroup>
 
     <ItemGroup Condition=" $(TargetFramework.StartsWith('netstandard3.1')) ">
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.10" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.13" />
     </ItemGroup>
 
     <ItemGroup>
